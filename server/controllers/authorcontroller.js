@@ -72,4 +72,18 @@ const singleauthor = async (req, res) => {
     }
 }
 
-exports.modules = { getallauthor, singleauthor, createauthor}
+const deleteauthor = async(req,res)=>{
+    try{
+        const deletion = await Authors.findByIdAndUpdate({_id:req.params.id})
+        if(deletion){
+            res.status(200).json({success:true,msg:"author deleted successfully"});
+        }
+        else{
+            res.status(400).json({msg:"something went wrong",sucess:false})
+        }
+    }
+    catch(err){
+        res.status(500).json({success:false,msg:"Internal server error"})
+    }
+}
+exports.modules = { getallauthor, singleauthor, createauthor,deleteauthor}
