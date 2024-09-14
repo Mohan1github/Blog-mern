@@ -1,7 +1,7 @@
 const express = require("express")
 const { getallusers, getuserbyid, edituser, deleteuser } = require("../controllers/usercontroller")
 
-const userrouter = express.Router()
+const userrouter = express.Router();
 
 userrouter.get("/getallusers", getallusers)
 userrouter.get("/getallusers/:id", getuserbyid)
