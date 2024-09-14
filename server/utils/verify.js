@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/usermodel")
 
 const verifylogin = async (req, res, next) => {
-    const { authorization } = req.headers
+    const { authorization } = req.cookies.token;
 
     if (!authorization) {
         return res.status(401).json({ msg: "you should logged in" })
