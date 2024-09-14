@@ -1,7 +1,7 @@
 const express = require("express")
 const { getallauthor, singleauthor, createauthor,deleteauthor } = require("../controllers/authorcontroller")
 
-const authorrouter = express.Router
+const authorrouter = express.Router();
 
 authorrouter.get("/all-author", getallauthor)
 authorrouter.get("/get-author/:id", singleauthor)
