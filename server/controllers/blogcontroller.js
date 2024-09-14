@@ -75,7 +75,7 @@ const createblog = async (req, res, next) => {
 const editblog = async (req, res, next) => {
     const { id } = req.params.id
     try {
-        const update = await Blogs.findByIdAndUpdate({ id: id }, { $set: req.body }, { new: true })
+        const update = await Blogs.findByIdAndUpdate({ _id: id }, { $set: req.body }, { new: true })
         if (update) {
             res.ststus(200).json({ success: true, data: update })
         }
@@ -88,7 +88,7 @@ const editblog = async (req, res, next) => {
 const deleteblog = async (req, res, next) => {
     const { id } = req.params.id
     try {
-        const deleting = await Blogs.findByIdAndDelete(id)
+        const deleting = await Blogs.findByIdAndDelete(_id:id)
         if (deleting) {
             res.ststus(200).json({ success: true, data: deleting })
         }
@@ -103,7 +103,7 @@ const deleteblog = async (req, res, next) => {
     }
 }
 const searchblogs = async (req, res, next) => {
-    const query = res.body
+    const query = req.body
     try {
         const searchedblog = await Blogs.find(query)
         if (searchedblog) {
@@ -160,7 +160,7 @@ const myblogs = async (req, res, next) => {
 
 const likes = async (req, res) => {
     try {
-        const liked = await Blogs.findByIdAndUpdate(req.user.postid, { $concat: { likes: req.user._id } }, { new: true })
+        const liked = await Blogs.findByIdAndUpdate(req.params.postid, { $concat: { likes: req.user._id } }, { new: true })
         if (liked) {
             liked.exec((res, err) => {
                 if (err) {
@@ -178,7 +178,7 @@ const likes = async (req, res) => {
 }
 const unlikes = async (req, res) => {
     try {
-        const liked = await Blogs.findByIdAndUpdate(req.user.postid, { $pull: { likes: req.user._id } }, { new: true })
+        const liked = await Blogs.findByIdAndUpdate(req.params.postid, { $pull: { likes: req.user._id } }, { new: true })
         if (liked) {
             liked.exec((res, err) => {
                 if (err) {
